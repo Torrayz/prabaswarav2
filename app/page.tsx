@@ -1,26 +1,27 @@
+import Navbar from "@/components/features/Navbar";
+import Hero from "@/components/features/Hero";
+import About from "@/components/features/About";
+import ServicesGrid from "@/components/features/ServicesGrid";
+import Portfolio from "@/components/features/Portfolio";
+import Testimonial from "@/components/features/Testimonial";
+import ContactForm from "@/components/features/ContactForm";
+import WhatsAppButton from "@/components/features/WhatsAppButton";
+import Footer from "@/components/features/Footer";
+
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-hero">
-      {/* Hero Placeholder */}
-      <section className="min-h-screen flex items-center justify-center section-padding">
-        <div className="section-container text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6">
-            CV. Prabaswara
-            <span className="block text-gradient-gold">Gandar Prima</span>
-          </h1>
-          <p className="text-xl text-navy-200 font-body max-w-2xl mx-auto mb-10">
-            Solusi Terpercaya untuk Bisnis Anda
-          </p>
-          <div className="accent-line-center mb-10" />
-          <a
-            href="#contact"
-            className="btn-primary text-lg"
-            id="hero-cta"
-          >
-            Hubungi Kami
-          </a>
-        </div>
-      </section>
-    </main>
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <ServicesGrid />
+        <Portfolio />
+        <Testimonial />
+        <ContactForm />
+      </main>
+      <Footer />
+      <WhatsAppButton />
+    </>
   );
 }
