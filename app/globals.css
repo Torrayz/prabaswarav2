@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy: #1B2A4A;
+    --navy-light: #2A3F6B;
+    --navy-dark: #0F1A30;
+    --gold: #C9A84C;
+    --gold-light: #E5D89A;
+    --gold-dark: #A88A32;
+    --cream: #FAF8F5;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-navy font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-navy-dark;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Card */
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-glass;
+  }
+
+  .glass-card-light {
+    @apply bg-white/80 backdrop-blur-lg border border-navy-100/30 rounded-2xl shadow-glass-sm;
+  }
+
+  /* Section spacing */
+  .section-padding {
+    @apply py-20 px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto;
+  }
+
+  /* Gold accent line */
+  .accent-line {
+    @apply w-16 h-1 bg-gradient-gold rounded-full;
+  }
+
+  .accent-line-center {
+    @apply w-16 h-1 bg-gradient-gold rounded-full mx-auto;
+  }
+
+  /* Text gradients */
+  .text-gradient-gold {
+    @apply bg-gradient-gold bg-clip-text text-transparent;
+  }
+
+  /* Button base */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg font-body font-semibold
+           transition-all duration-300 ease-out
+           focus:outline-none focus:ring-2 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-gold text-navy-dark px-8 py-3
+           hover:bg-gold-dark hover:shadow-gold
+           focus:ring-gold active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn bg-navy text-white px-8 py-3
+           hover:bg-navy-light hover:shadow-glass-sm
+           focus:ring-navy active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-gold text-gold px-8 py-3
+           hover:bg-gold hover:text-navy-dark
+           focus:ring-gold active:scale-[0.98];
+  }
+
+  /* Input styles */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg bg-white border border-navy-100
+           font-body text-navy placeholder:text-navy-300
+           transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold;
+  }
+
+  .textarea-field {
+    @apply input-field resize-none min-h-[120px];
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Masonry layout */
+  .masonry-grid {
+    columns: 1;
+    column-gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .masonry-grid {
+      columns: 2;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .masonry-grid {
+      columns: 3;
+    }
+  }
+
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+  }
+}
