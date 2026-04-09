@@ -15,6 +15,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* offset for fixed navbar */
   }
 
   body {
@@ -30,6 +31,48 @@
 
   ::selection {
     @apply bg-gold/30 text-navy-dark;
+  }
+
+  /* Keyboard focus outlines */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+  }
+
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Print styles */
+@media print {
+  .glass-card,
+  .glass-card-light {
+    background: white !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+
+  nav,
+  #whatsapp-button {
+    display: none !important;
+  }
+
+  body {
+    color: black !important;
+    background: white !important;
   }
 }
 
