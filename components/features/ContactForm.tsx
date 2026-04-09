@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import { contactFormSchema, type ContactFormData } from "@/validations/contact";
+import { submitContactForm } from "@/app/actions/contact";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -22,7 +23,6 @@ export default function ContactForm() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error pada field yang diubah
     if (errors[name as keyof ContactFormData]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -33,10 +33,10 @@ export default function ContactForm() {
     setErrors({});
 
     // Validasi client-side dengan Zod
-    const result = contactFormSchema.safeParse(formData);
-    if (!result.success) {
+    const validationResult = contactFormSchema.safeParse(formData);
+    if (!validationResult.success) {
       const fieldErrors: Partial<Record<keyof ContactFormData, string>> = {};
-      result.error.issues.forEach((err) => {
+      validationResult.error.issues.forEach((err) => {
         const field = err.path[0] as keyof ContactFormData;
         if (!fieldErrors[field]) {
           fieldErrors[field] = err.message;
@@ -50,12 +50,26 @@ export default function ContactForm() {
     setIsLoading(true);
 
     try {
-      // Simulasi submit (akan diganti dengan Server Action)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      toast.success("Pesan Anda berhasil dikirim! Kami akan segera menghubungi Anda.");
-      setFormData({ nama: "", email: "", perusahaan: "", pesan: "" });
+      // Submit via Server Action
+      const fd = new FormData();
+      fd.append("nama", formData.nama);
+      fd.append("email", formData.email);
+      fd.append("perusahaan", formData.perusahaan || "");
+      fd.append("pesan", formData.pesan);
+
+      const result = await submitContactForm(fd);
+
+      if (result.success) {
+        toast.success(result.message);
+        setFormData({ nama: "", email: "", perusahaan: "", pesan: "" });
+      } else {
+        toast.error(result.message);
+        if (result.errors) {
+          setErrors(result.errors as Partial<Record<keyof ContactFormData, string>>);
+        }
+      }
     } catch {
-      toast.error("Terjadi kesalahan. Silakan coba lagi.");
+      toast.error("Terjadi kesalahan jaringan. Silakan coba lagi.");
     } finally {
       setIsLoading(false);
     }
