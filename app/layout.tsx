@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import { COMPANY_INFO } from "@/lib/constants";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -44,9 +45,9 @@ export const metadata: Metadata = {
     "jasa konstruksi",
     "mitra bisnis terpercaya",
   ],
-  authors: [{ name: "CV. Prabaswara Gandar Prima" }],
-  creator: "CV. Prabaswara Gandar Prima",
-  publisher: "CV. Prabaswara Gandar Prima",
+  authors: [{ name: COMPANY_INFO.name }],
+  creator: COMPANY_INFO.name,
+  publisher: COMPANY_INFO.name,
   openGraph: {
     type: "website",
     locale: "id_ID",
@@ -92,9 +93,9 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "CV. Prabaswara Gandar Prima",
-  url: "https://prabaswarav2.com",
-  logo: "https://prabaswarav2.com/logo.png",
+  name: COMPANY_INFO.name,
+  url: COMPANY_INFO.baseUrl,
+  logo: `${COMPANY_INFO.baseUrl}/logo.png`,
   description:
     "Mitra terpercaya untuk layanan konsultasi bisnis, manajemen proyek, pengadaan & logistik, serta perencanaan strategis.",
   address: {
@@ -104,7 +105,7 @@ const jsonLd = {
   },
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+62-812-3456-7890",
+    telephone: COMPANY_INFO.phone,
     contactType: "customer service",
     availableLanguage: "Indonesian",
   },

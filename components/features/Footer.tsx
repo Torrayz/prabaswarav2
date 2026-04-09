@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { COMPANY_INFO } from "@/lib/constants";
 
 const footerLinks = {
   layanan: [
@@ -109,9 +110,13 @@ export default function Footer() {
                   />
                 </svg>
                 <span className="text-navy-200 font-body text-sm">
-                  Jl. Contoh Alamat No. 123
-                  <br />
-                  Kota, Indonesia
+                  {COMPANY_INFO.address.split(',').map((part, i) => (
+                    <span key={i}>
+                      {part.trim()}
+                      {i === 0 && <br />}
+                      {i !== 0 && i < COMPANY_INFO.address.split(',').length - 1 && ', '}
+                    </span>
+                  ))}
                 </span>
               </div>
               <div className="flex items-center gap-3">
@@ -129,7 +134,7 @@ export default function Footer() {
                   />
                 </svg>
                 <span className="text-navy-200 font-body text-sm">
-                  info@prabaswarav2.com
+                  {COMPANY_INFO.email}
                 </span>
               </div>
               <div className="flex items-center gap-3">
@@ -147,7 +152,7 @@ export default function Footer() {
                   />
                 </svg>
                 <span className="text-navy-200 font-body text-sm">
-                  +62 812 3456 7890
+                  {COMPANY_INFO.phone}
                 </span>
               </div>
             </div>

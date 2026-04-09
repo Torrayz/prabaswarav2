@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { COMPANY_INFO } from "@/lib/constants";
 
-const WHATSAPP_NUMBER = "6281234567890"; // Ganti dengan nomor asli
+const WHATSAPP_NUMBER = COMPANY_INFO.whatsapp;
 const WHATSAPP_MESSAGE = encodeURIComponent(
-  "Halo, saya tertarik dengan layanan CV. Prabaswara Gandar Prima. Bisakah kita berdiskusi?"
+  `Halo, saya tertarik dengan layanan ${COMPANY_INFO.name}. Bisakah kita berdiskusi?`
 );
 
 export default function WhatsAppButton() {
